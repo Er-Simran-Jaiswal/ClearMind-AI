@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ClearMind AI turns difficult text into simple explanations, summaries, and key points.">
+  <title>ClearMind AI — Understand Anything</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="ClearMind AI home">
+        <span class="brand-mark">✳</span>
+        <span>ClearMind<span class="brand-ai"> AI</span></span>
+      </a>
+      <div class="topbar-right">
+        <span class="status-dot"></span><span class="small-muted">Your learning space</span>
+        <button id="settingsBtn" class="settings-btn" type="button" title="Set up AI">⚙ <span>AI setup</span></button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow"><span>✦</span> MAKE COMPLEX THINGS SIMPLE</div>
+        <h1>Understand anything.<br><span class="gradient-text">One clear page at a time.</span></h1>
+        <p class="hero-copy">Paste your notes, textbook passage, or any difficult text. Get a clear explanation, key takeaways, and a summary you can actually remember.</p>
+        <div class="hero-tags"><span>✧ Easy explanations</span><span>↗ Key points</span><span>▤ Quick summaries</span></div>
+      </section>
+
+      <section class="workspace">
+        <div class="input-panel panel">
+          <div class="panel-heading">
+            <div><span class="step-label">STEP 01</span><h2>Bring your text</h2></div>
+            <span class="panel-icon">↳</span>
+          </div>
+          <label class="field-label" for="sourceText">WHAT WOULD YOU LIKE TO UNDERSTAND?</label>
+          <textarea id="sourceText" placeholder="Paste a paragraph from your textbook, lecture notes, an article, or any text that feels confusing…"></textarea>
+          <div class="input-footer">
+            <span id="charCount">0 characters</span>
+            <label class="upload-btn" for="fileInput">＋ Upload .txt file</label>
+            <input id="fileInput" type="file" accept=".txt,text/plain">
+          </div>
+          <div class="level-row">
+            <label for="levelSelect">Explain it for</label>
+            <select id="levelSelect">
+              <option value="a beginner student using simple English">A beginner</option>
+              <option value="a school student with simple examples">A school student</option>
+              <option value="a first-year college student, with useful detail">A college student</option>
+              <option value="someone who wants a very short, plain-language explanation">A quick read</option>
+            </select>
+          </div>
+          <button id="simplifyBtn" class="primary-btn" type="button"><span>✦</span> Simplify my text <span class="btn-arrow">→</span></button>
+          <p class="privacy-note">⌑ Your text stays in this page unless you choose to send it to the AI service.</p>
+          <div id="errorBox" class="error-box" role="alert" hidden></div>
+        </div>
+
+        <div class="results-panel">
+          <div class="results-heading">
+            <div><span class="step-label">STEP 02</span><h2>Your clear notes</h2></div>
+            <span class="ready-pill"><span class="status-dot"></span> <span id="resultStatus">Ready when you are</span></span>
+          </div>
+          <div id="emptyState" class="empty-state">
+            <div class="empty-art">
+              <div class="art-paper"><span class="art-line long"></span><span class="art-line"></span><span class="art-line short"></span><div class="art-spark">✦</div></div>
+              <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+            </div>
+            <h3>Clarity starts here.</h3>
+            <p>Your simplified explanation, summary, and key points will appear here.</p>
+            <div class="empty-hint"><span>✧</span> Tip: Start with one paragraph for the clearest result.</div>
+          </div>
+          <div id="results" class="results-content" hidden>
+            <article class="result-card explanation-card">
+              <div class="result-card-title"><span class="result-icon purple">✧</span><h3>In simple words</h3><button class="copy-btn" data-copy="explanation" type="button">Copy</button></div>
+              <div id="explanation" class="result-text"></div>
+            </article>
+            <article class="result-card">
+              <div class="result-card-title"><span class="result-icon blue">☷</span><h3>Key takeaways</h3><button class="copy-btn" data-copy="keyPoints" type="button">Copy</button></div>
+              <ul id="keyPoints" class="key-points"></ul>
+            </article>
+            <article class="result-card">
+              <div class="result-card-title"><span class="result-icon yellow">▤</span><h3>Quick summary</h3><button class="copy-btn" data-copy="summary" type="button">Copy</button></div>
+              <div id="summary" class="result-text"></div>
+            </article>
+            <article class="result-card" id="termsCard">
+              <div class="result-card-title"><span class="result-icon green">Aa</span><h3>Words to know</h3><button class="copy-btn" data-copy="terms" type="button">Copy</button></div>
+              <ul id="terms" class="terms-list"></ul>
+            </article>
+            <button id="resetBtn" class="secondary-btn" type="button">↺ Start with new text</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="how-section">
+        <div><span class="step-label">MADE FOR LEARNING</span><h2>Less confusion. More understanding.</h2></div>
+        <div class="feature-grid">
+          <div class="feature"><span class="feature-icon lavender">✦</span><h3>Plain-language explanations</h3><p>Turn complicated wording into everyday English without losing the main idea.</p></div>
+          <div class="feature"><span class="feature-icon sky">☷</span><h3>Only the important bits</h3><p>Find the main points so revision feels more manageable.</p></div>
+          <div class="feature"><span class="feature-icon peach">↗</span><h3>Learn at your level</h3><p>Choose a level that suits you and build understanding one step at a time.</p></div>
+        </div>
+      </section>
+      <footer><a class="brand footer-brand" href="#"><span class="brand-mark">✳</span><span>ClearMind<span class="brand-ai"> AI</span></span></a><span>Built to make learning feel lighter. ✦</span></footer>
+    </main>
+  </div>
+
+  <dialog id="settingsDialog" class="settings-dialog">
+    <form method="dialog" id="settingsForm">
+      <div class="dialog-heading"><div><span class="step-label">AI CONFIGURATION</span><h2>Connect your AI</h2></div><button class="close-btn" value="cancel" aria-label="Close">×</button></div>
+      <p class="dialog-copy">Enter a Gemini API key to enable real AI explanations. The key is kept only in this page's memory and is not saved. Do not use a personal key on a public deployment.</p>
+      <label class="field-label" for="apiKey">GEMINI API KEY</label>
+      <input id="apiKey" class="api-input" type="password" autocomplete="off" placeholder="Paste your API key here">
+      <p class="dialog-help">Get a key from <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer">Google AI Studio ↗</a>. Keep it private.</p>
+      <div class="dialog-actions"><button class="secondary-btn" value="cancel">Cancel</button><button id="saveKeyBtn" class="primary-btn compact" value="save" type="button">Use this key</button></div>
+    </form>
+  </dialog>
+  <script src="script.js"></script>
+</body>
+</html>
